@@ -1,0 +1,37 @@
+--- a/install.sh	2022-05-16 14:12:08.224076080 -0700
++++ b/install.sh	2022-05-16 14:14:58.464081436 -0700
+@@ -799,32 +799,8 @@
+       # Uninstall the tools that have just been unpacked (if possible)
+       uninstall_previous "$SPECTARGET"
+   else
+-      cd "$SPECTARGET"
+-
+-      # shrc will add LD_LIBRARY_PATH if it is needed
+-      . ./shrc
+-
+-      # Run the runcpu tests to make sure that everything is okay.
+-      testout=runcpu-test.${arch}.out
+-      echo "Testing the tools installation (this may take a minute)"
+-      echo
+-      if eval "runcpu --test=dots 3>&1 > $testout 2>&1"; then
+-          rm runcpu-test*.out
+-          insterrors=
+-          if [ -n "$SPEC_NOCHECK" ]; then
+-              $SPECTARGET/bin/specperl -ni -e '$l = $_; print; if (eof) { $l =~ tr/\012\015//d; $l =~ s/([0-9a-f]{13,})/"badb00".("0" x (length($1) - 13))."ca5cade"/eg; $l =~ s/ \S+$/ nocheck-install/; print $l."\r\n" }' $SPECTARGET/MANIFEST
+-          fi
+-      else
+-          errors="${errors}
+-
+-Error running runcpu tests.  See $SPECTARGET/$testout for details,
+-if no other toolsets install successfully.
+-
+-"
+-              insterrors="${insterrors}
+-$SPECTARGET/$testout
+-"
+-      fi
++      # RIVOS: Skip tests.
++      true
+   fi
+ 
+   if [ "x$errors" = "x" ]; then
