@@ -44,12 +44,12 @@
 in
   stdenv.mkDerivation rec {
     pname = "cpu2017";
-    version = "1.1.7";
+    version = "1.1.9";
 
     src = requireFile {
       name = "cpu2017-${version}.iso";
-      url = "https://www.spec.org/cpu2017/";
-      sha256 = "02630819h64dyy57wkj33fhwwqgbw6mqc5awh1zm48pkvvl0l600";
+      url = "file:///opt/cpu2017-1.1.9.iso";
+      sha256 = "02fys6772zxwy3rxpw49gjwaxi9wrcd4zvm441jvjjgpgkvvsrwv";
     };
 
     unpackPhase = ''
